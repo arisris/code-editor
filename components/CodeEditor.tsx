@@ -1,18 +1,11 @@
-import {
-  Fragment,
-  useEffect,
-  useRef,
-  useState
-} from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Highlight, {
   defaultProps,
   Language,
-  Prism
+  Prism,
+  PrismTheme
 } from "prism-react-renderer";
 import { useEditable, Options, Position } from "use-editable";
-import themeLight from "prism-react-renderer/themes/github";
-import themeDark from "prism-react-renderer/themes/dracula";
-import { useTheme } from "next-themes";
 import clsx from "clsx";
 import filename2prism from "filename2prism";
 
@@ -31,6 +24,7 @@ interface Props extends Options {
   filename?: string;
   onChange?: (code: string, pos: Position) => void;
   className?: string;
+  theme?: PrismTheme;
 }
 
 export function CodeEditor({
@@ -39,13 +33,13 @@ export function CodeEditor({
   indentation = 2,
   disabled = false,
   filename = "",
+  theme,
   className,
   ...props
 }: Props) {
-  const { resolvedTheme } = useTheme();
-  const [theme, setTheme] = useState(themeLight);
-  const [mounted, setMounted] = useState(false);
   const ref = useRef<HTMLPreElement>();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   useEditable(
     ref,
     (code, pos) => {
@@ -57,13 +51,6 @@ export function CodeEditor({
       indentation
     }
   );
-  useEffect(() => setMounted(true), []);
-  useEffect(
-    () => {
-      setTheme(resolvedTheme === "dark" ? themeDark : themeLight)
-    },
-    [resolvedTheme]
-  );
   return (
     <Highlight
       {...defaultProps}
@@ -74,11 +61,10 @@ export function CodeEditor({
       {({ className: clazz, style, tokens, getLineProps, getTokenProps }) => (
         <pre
           className={clsx(
-            clazz,
-            "ring-1 focus:ring-2 focus:outline-none transition-all duration-300",
-            className
+            "p-4 outline-none focus:border-none focus:outline-none", 
+            className,
+            clazz
           )}
-          style={style}
           ref={ref}
         >
           {tokens.map((line, i) => (

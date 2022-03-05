@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { useDispatch, useSelector } from "react-redux";
+import { esBuildTools } from "./esBuildTools";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    [esBuildTools.name]: esBuildTools.reducer
+  },
   middleware: (middleware) => middleware()
 });
 

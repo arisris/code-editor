@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/arisris/arisris.com#readme",
   "scripts": {
-    "start": "next start",
-    "dev": "next dev",
-    "build": "next build",
-    "export": "next export",
+    "start": "npm run copy-esbuild && next start",
+    "dev": "npm run copy-esbuild && next dev",
+    "build": "npm run copy-esbuild && next build",
+    "export": "npm run copy-esbuild && next export",
     "copy-esbuild": "cp node_modules/esbuild-wasm/esbuild.wasm public/esbuild.wasm",
     "upload": "git add . && git commit -m 'Update' && git push"
   },
@@ -40,6 +40,7 @@
     "prism-react-renderer": "^1.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "rollup": "^2.68.0",
     "rollup-plugin-virtual-fs": "^4.0.1-alpha.0",

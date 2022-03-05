@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollbar-styled::-webkit-scrollbar {
+  @apply w-2 bg-transparent
+}
+.scrollbar-styled::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md;
+}
