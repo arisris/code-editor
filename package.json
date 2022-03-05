@@ -1,5 +1,5 @@
 {
-  "name": "arisris.com",
+  "name": "code-editor",
   "version": "1.0.0",
   "description": "My expreiment using next.js",
   "main": "index.js",
@@ -13,12 +13,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arisris/arisris.com.git"
+    "url": "git+https://github.com/arisris/code-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/arisris/arisris.com/issues"
+    "url": "https://github.com/arisris/code-editor/issues"
   },
-  "homepage": "https://github.com/arisris/arisris.com#readme",
+  "homepage": "https://github.com/arisris/code-editor#readme",
   "scripts": {
     "start": "npm run copy-esbuild && next start",
     "dev": "npm run copy-esbuild && next dev",
