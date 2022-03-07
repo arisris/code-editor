@@ -60,8 +60,9 @@ export function CodeEditor({
     >
       {({ className: clazz, style, tokens, getLineProps, getTokenProps }) => (
         <pre
+          style={style}
           className={clsx(
-            "p-4 outline-none focus:border-none focus:outline-none", 
+            "p-4 outline-none focus:border-none focus:outline-none !bg-transparent",
             className,
             clazz
           )}

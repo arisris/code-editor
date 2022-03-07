@@ -14,5 +14,8 @@ module.exports = {
       "avatars.githubusercontent.com", // github avatar
       "icongr.am"
     ]
+  },
+  webpack: (config, options) => {
+    return config;
   }
 };

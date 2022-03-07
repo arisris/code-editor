@@ -1,0 +1,138 @@
+.w-split {
+  @apply flex flex-row h-full;
+}
+.w-split-bar {
+  @apply bg-white dark:bg-gray-700 flex justify-center relative select-none z-10;
+}
+.w-split-bar:after,
+.w-split-bar:before {
+  content: "";
+  @apply block;
+}
+.w-split-bar.disable {
+  @apply !cursor-not-allowed pointer-events-none;
+}
+.w-split-bar:hover:not(.disable) {
+  @apply bg-white dark:bg-gray-700 transition-[background-color];
+}
+.w-split.dragging .w-split-pane {
+  @apply relative;
+}
+.w-split.dragging .w-split-pane:before {
+  content: "";
+  @apply block h-full absolute w-full z-10;
+}
+.w-split > .w-split-pane {
+  @apply transform-none;
+}
+.w-split:not(.dragging) > .w-split-pane {
+  @apply transition-all;
+}
+.w-split-horizontal > .w-split-bar {
+  @apply shadow cursor-col-resize flex-col w-1;
+}
+.w-split-horizontal > .w-split-bar:after,
+.w-split-horizontal > .w-split-bar:before {
+  @apply shadow h-1 w-full;
+}
+.w-split-horizontal > .w-split-bar:before {
+  @apply mt-[-1px];
+}
+.w-split-horizontal > .w-split-bar:after {
+  @apply mt-[3px];
+}
+.w-split-horizontal > .w-split-bar.disable {
+  @apply shadow;
+}
+.w-split-vertical {
+  @apply flex-col;
+}
+.w-split-vertical > .w-split-bar {
+  @apply items-center shadow cursor-row-resize flex-row h-1 w-full;
+}
+.w-split-vertical > .w-split-bar.disable {
+  @apply shadow;
+}
+.w-split-vertical > .w-split-bar:after,
+.w-split-vertical > .w-split-bar:before {
+  @apply shadow h-full w-[3px];
+}
+.w-split-vertical > .w-split-bar:before {
+  @apply mt-[-1px];
+}
+.w-split-vertical > .w-split-bar:after {
+  margin-left: 3px;
+  @apply ml-[3px];
+}
+.w-split-large-bar div {
+  @apply inset-0 absolute;
+}
+.w-split-horizontal > .w-split-line-bar:hover:before,
+.w-split-vertical > .w-split-line-bar:hover:before {
+  @apply border-blue-500 dark:border-gray-500;
+}
+.w-split-vertical > .w-split-line-bar {
+  @apply h-[1px];
+}
+.w-split-vertical > .w-split-line-bar div {
+  @apply cursor-row-resize h-2 my-[-2px] w-full;
+}
+.w-split-vertical > .w-split-line-bar div:active,
+.w-split-vertical > .w-split-line-bar div:focus,
+.w-split-vertical > .w-split-line-bar div:hover {
+  @apply h-[6px] my-[-6px];
+}
+.w-split-vertical > .w-split-line-bar div:active:after,
+.w-split-vertical > .w-split-line-bar div:focus:after,
+.w-split-vertical > .w-split-line-bar div:hover:after {
+  @apply bg-blue-500 dark:bg-gray-500;
+}
+.w-split-vertical > .w-split-line-bar div:after {
+  @apply h-[1px] w-full;
+}
+.w-split-horizontal > .w-split-line-bar {
+  @apply w-[1px];
+}
+.w-split-horizontal > .w-split-line-bar div {
+  @apply cursor-col-resize h-full mx-[-2px] w-2;
+}
+.w-split-horizontal > .w-split-line-bar div:active,
+.w-split-horizontal > .w-split-line-bar div:focus,
+.w-split-horizontal > .w-split-line-bar div:hover {
+  @apply mx-[-6px] w-[6px];
+}
+.w-split-horizontal > .w-split-line-bar div:active:after,
+.w-split-horizontal > .w-split-line-bar div:focus:after,
+.w-split-horizontal > .w-split-line-bar div:hover:after {
+  @apply bg-blue-500 dark:bg-gray-500;
+}
+.w-split-horizontal > .w-split-line-bar div:after {
+  @apply h-full w-[1px];
+}
+.w-split-horizontal > .w-split-line-bar,
+.w-split-vertical > .w-split-line-bar {
+  flex-direction: inherit;
+}
+.w-split-horizontal > .w-split-line-bar:before,
+.w-split-vertical > .w-split-line-bar:before {
+  @apply hidden;
+}
+.w-split-horizontal > .w-split-line-bar div,
+.w-split-vertical > .w-split-line-bar div {
+  @apply items-center flex justify-center relative;
+}
+.w-split-horizontal > .w-split-line-bar div:after,
+.w-split-vertical > .w-split-line-bar div:after {
+  content: "";
+  @apply block bg-white dark:bg-gray-700;
+}
+.w-split-line-bar {
+  @apply bg-transparent;
+}
+.w-split-line-bar,
+.w-split-line-bar:before {
+  @apply shadow;
+}
+.w-split-line-bar:after {
+  @apply hidden;
+}
