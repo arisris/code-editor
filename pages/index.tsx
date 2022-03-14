@@ -1,9 +1,50 @@
-import { CodeEditor } from "components/CodeEditor";
+import { javascript } from "@codemirror/lang-javascript";
+import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import EditorLayout from "components/EditorLayout";
 import { useTheme } from "next-themes";
-import dracula from "prism-react-renderer/themes/dracula";
-import github from "prism-react-renderer/themes/github";
 import { useEffect, useState } from "react";
+
+export default function Page({ latestUpdatedRepos }) {
+  const theme = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return (
+    <EditorLayout
+      cols={
+        mounted
+          ? [
+              <CodeMirror
+                theme={theme.resolvedTheme}
+                value={example}
+                minHeight="89.9vh"
+                minWidth="100%"
+                extensions={[
+                  javascript({
+                    jsx: true,
+                    typescript: true,
+                  }),
+                  EditorView.lineWrapping
+                ]}
+              />,
+              // <CodeMirror
+              //   theme={theme.resolvedTheme}
+              //   value={example}
+              //   minHeight="89.9vh"
+              //   minWidth="100%"
+              //   extensions={[
+              //     javascript({
+              //       jsx: true,
+              //       typescript: true
+              //     }),
+              //     EditorView.lineWrapping
+              //   ]}
+              // />
+            ]
+          : []
+      }
+    />
+  );
+}
 
 const example = `import { Fragment, useEffect, useRef, useState } from "react";
 import Highlight, {
@@ -91,23 +132,3 @@ export function CodeEditor({
   );
 }
 `;
-
-export default function Page({ latestUpdatedRepos }) {
-  const theme = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  return (
-    <EditorLayout>
-      <CodeEditor
-        code={example}
-        filename="file.tsx"
-        theme={mounted && theme.resolvedTheme === "dark" ? dracula : github}
-      />
-      <CodeEditor
-        code={`console.error(new Error("Blah blah.))`}
-        filename="file.tsx"
-        theme={mounted && theme.resolvedTheme === "dark" ? dracula : github}
-      />
-    </EditorLayout>
-  );
-}

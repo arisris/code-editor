@@ -13,7 +13,7 @@
   @apply !cursor-not-allowed pointer-events-none;
 }
 .w-split-bar:hover:not(.disable) {
-  @apply bg-white dark:bg-gray-700 transition-[background-color];
+  @apply bg-white dark:bg-gray-700;
 }
 .w-split.dragging .w-split-pane {
   @apply relative;
@@ -26,7 +26,7 @@
   @apply transform-none;
 }
 .w-split:not(.dragging) > .w-split-pane {
-  @apply transition-all;
+  @apply transition-none;
 }
 .w-split-horizontal > .w-split-bar {
   @apply shadow cursor-col-resize flex-col w-1;

@@ -22,10 +22,10 @@ export default class MyDocument extends Document {
             href="/favicon/favicon-16x16.png"
           />
           <link rel="manifest" href="/favicon/site.webmanifest" />
-          <meta
+          {/* <meta
             name="google-site-verification"
             content="HqRlPHb6rKQHLdM0ifiL0wHexR1qaUVFr_5f0dr0bKI"
-          />
+          /> */}
         </Head>
         <body className="bg-white dark:bg-gray-900 text-black dark:text-white overflow-hidden">
           <Main />

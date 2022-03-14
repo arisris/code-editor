@@ -1,12 +1,11 @@
 import {
   Children,
   CSSProperties,
-  MouseEvent,
+  Fragment,
   MouseEventHandler,
-  MutableRefObject,
   PropsWithChildren,
+  ReactElement,
   ReactNode,
-  Ref,
   useCallback,
   useEffect,
   useMemo,
@@ -21,6 +20,7 @@ import { noopFn } from "lib/utils";
 import { useModal } from "hooks/useModal";
 import Split from "components/Split";
 import { useSize } from "ahooks";
+import { FileTrees } from "./TreeList";
 
 function MenuIcon(props: {
   className?: string;
@@ -50,10 +50,10 @@ function SettingsModal() {
 type EditorLayoutProps = PropsWithChildren<{
   title?: string;
   description?: string;
-  colSize?: number;
+  cols?: JSX.Element[];
 }>;
 
-function EditorLayout({ children, title, description }: EditorLayoutProps) {
+function EditorLayout({ children, cols = [] }: EditorLayoutProps) {
   const ref = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const modal = useModal();
@@ -110,7 +110,7 @@ function EditorLayout({ children, title, description }: EditorLayoutProps) {
         </div>
       </div>
       <Split
-        className="relative flex-auto flex max-w-full h-[92vh] mt-[7vh] min-w-full"
+        className="relative flex-auto flex max-w-full min-h-[1vh] mt-[7vh] min-w-full"
         lineBar={isLarge}
         disable={!isLarge}
       >
@@ -120,13 +120,16 @@ function EditorLayout({ children, title, description }: EditorLayoutProps) {
             treeMenuOpened ? "block" : "hidden"
           )}
         >
-          <div className="p-1"></div>
+          <div className="py-2 px-4 border-b dark:border-gray-600">Top</div>
+          <div className="mt-2 overflow-auto max-h-[80vh] scrollbar-styled">
+            {mounted && <FileTrees />}
+          </div>
         </div>
         <Split
           mode={isLarge ? "horizontal" : "vertical"}
           className={clsx(isLarge ? "w-full" : "min-w-full")}
         >
-          {Children.toArray(children).map((child, key, arr) => {
+          {cols.map((child, key, arr) => {
             const style: CSSProperties = {
               width: isLarge ? `${100 / arr.length}%` : "100%",
               height: isLarge ? "100%" : `${100 / arr.length}%`
@@ -135,7 +138,7 @@ function EditorLayout({ children, title, description }: EditorLayoutProps) {
               <div
                 key={key}
                 className={clsx(
-                  "flex-auto overflow-y-auto text-xs shadow scrollbar-styled"
+                  "flex-auto overflow-x-auto overflow-y-scroll text-xs shadow scrollbar-styled"
                 )}
                 style={style}
               >
@@ -143,20 +146,12 @@ function EditorLayout({ children, title, description }: EditorLayoutProps) {
               </div>
             );
           })}
-          {/* <div
-            className={clsx(
-              "flex-auto overflow-y-auto text-xs shadow scrollbar-styled"
-            )}
-            style={{
-              width: isLarge ? "50%" : "100%",
-              height: isLarge ? "100%" : "50%"
-            }}
-          >
-            {children}
-          </div> */}
         </Split>
       </Split>
-      <div className="fixed z-10 bottom-0 inset-x-0 h-[3vh] flex justify-between shadow-md bg-gray-300 dark:bg-gray-800"></div>
+      <div className="z-10 bottom-0 inset-x-0 px-2 h-[4vh] flex justify-between items-center shadow-md bg-gray-300 dark:bg-gray-900">
+        <div>Left bottom</div>
+        <div>Right bottom</div>
+      </div>
     </div>
   );
 }
