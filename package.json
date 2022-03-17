@@ -28,17 +28,9 @@
     "upload": "git add . && git commit -m 'Update' && git push"
   },
   "dependencies": {
-    "@codemirror/basic-setup": "^0.19.1",
-    "@codemirror/lang-css": "^0.19.3",
-    "@codemirror/lang-html": "^0.19.4",
-    "@codemirror/lang-javascript": "^0.19.7",
-    "@codemirror/lang-json": "^0.19.2",
-    "@codemirror/state": "^0.19.9",
-    "@codemirror/view": "^0.19.47",
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.6",
     "@reduxjs/toolkit": "^1.8.0",
-    "@uiw/react-codemirror": "^4.5.1",
     "ahooks": "^3.1.9",
     "clsx": "^1.1.1",
     "esbuild-wasm": "^0.14.23",
@@ -49,7 +41,6 @@
     "next-themes": "^0.0.16-beta.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "use-clipboard-copy": "^0.2.0"
   },

@@ -1,44 +1,26 @@
-import { javascript } from "@codemirror/lang-javascript";
-import CodeMirror, { EditorView } from "@uiw/react-codemirror";
-import EditorLayout from "components/EditorLayout";
+
+import Editor from "components/Editor";
+import { useAceEditor } from "hooks/useAceEditor";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Page({ latestUpdatedRepos }) {
   const theme = useTheme();
+  const editor1 = useRef<any>();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+  useAceEditor({
+    el: editor1.current,
+    mode: "javascript",
+    value: example,
+    theme: theme.resolvedTheme
+  });
   return (
-    <EditorLayout
+    <Editor
       cols={
         mounted
           ? [
-              <CodeMirror
-                theme={theme.resolvedTheme}
-                value={example}
-                minHeight="89.9vh"
-                minWidth="100%"
-                extensions={[
-                  javascript({
-                    jsx: true,
-                    typescript: true,
-                  }),
-                  EditorView.lineWrapping
-                ]}
-              />,
-              // <CodeMirror
-              //   theme={theme.resolvedTheme}
-              //   value={example}
-              //   minHeight="89.9vh"
-              //   minWidth="100%"
-              //   extensions={[
-              //     javascript({
-              //       jsx: true,
-              //       typescript: true
-              //     }),
-              //     EditorView.lineWrapping
-              //   ]}
-              // />
+              <div ref={editor1} className="absolute inset-0 z-0"></div>
             ]
           : []
       }

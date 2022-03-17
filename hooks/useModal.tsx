@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useSetState, useUpdateEffect } from "ahooks";
 import type { SetState } from "ahooks/lib/useSetState";
 import { createContext, Fragment, ReactNode, useContext } from "react";
-import { FaTimes } from "react-icons/fa";
+import HiCloseIcon from "@heroicons/react/outline/esm/XIcon";
 
 interface ModalState {
   open: boolean;
@@ -87,7 +87,7 @@ function ModalComponent() {
                     type="button"
                     onClick={() => setState({ open: false })}
                   >
-                    <FaTimes size={24} />
+                    <HiCloseIcon width={24} height={24} />
                   </button>
                 </div>
               )}

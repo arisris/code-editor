@@ -1,10 +1,7 @@
 import {
-  Children,
   CSSProperties,
-  Fragment,
   MouseEventHandler,
   PropsWithChildren,
-  ReactElement,
   ReactNode,
   useCallback,
   useEffect,
@@ -12,8 +9,11 @@ import {
   useRef,
   useState
 } from "react";
-import { HiCog, HiKey, HiMenu, HiMoon, HiPlay, HiSun } from "react-icons/hi";
-import { Transition } from "@headlessui/react";
+import HiCogIcon from "@heroicons/react/outline/esm/CogIcon";
+import HiPlayIcon from "@heroicons/react/outline/esm/PlayIcon";
+import HiMenuIcon from "@heroicons/react/outline/esm/MenuIcon";
+import HiMoonIcon from "@heroicons/react/outline/esm/MoonIcon";
+import HiSunIcon from "@heroicons/react/outline/esm/SunIcon";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
 import { noopFn } from "lib/utils";
@@ -21,6 +21,7 @@ import { useModal } from "hooks/useModal";
 import Split from "components/Split";
 import { useSize } from "ahooks";
 import { FileTrees } from "./TreeList";
+import { EditorTabs } from "./EditorTabs";
 
 function MenuIcon(props: {
   className?: string;
@@ -53,7 +54,7 @@ type EditorLayoutProps = PropsWithChildren<{
   cols?: JSX.Element[];
 }>;
 
-function EditorLayout({ children, cols = [] }: EditorLayoutProps) {
+function Editor({ children, cols = [] }: EditorLayoutProps) {
   const ref = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const modal = useModal();
@@ -74,7 +75,7 @@ function EditorLayout({ children, cols = [] }: EditorLayoutProps) {
       <div className="fixed inset-x-0 top-0 flex justify-between items-center shadow-md dark:bg-gray-800 h-[7vh] lg:px-2">
         <div className="inline-flex items-center gap-2">
           <MenuIcon
-            icon={<HiMenu size={24} />}
+            icon={<HiMenuIcon width={24} height={24} />}
             title="Toggle Menu"
             onClick={toggleMenu}
             className="lg:hidden"
@@ -84,9 +85,12 @@ function EditorLayout({ children, cols = [] }: EditorLayoutProps) {
           </h1>
         </div>
         <div className="inline-flex items-center gap-2">
-          <MenuIcon icon={<HiPlay size={24} />} title="Run Bundler" />
           <MenuIcon
-            icon={<HiCog size={24} />}
+            icon={<HiPlayIcon width={24} height={24} />}
+            title="Run Bundler"
+          />
+          <MenuIcon
+            icon={<HiCogIcon width={24} height={24} />}
             title="Editor Settings"
             onClick={() => {
               modal.create(<SettingsModal />);
@@ -97,9 +101,9 @@ function EditorLayout({ children, cols = [] }: EditorLayoutProps) {
             icon={
               mounted &&
               (theme.resolvedTheme === "dark" ? (
-                <HiSun size={24} />
+                <HiSunIcon width={24} height={24} />
               ) : (
-                <HiMoon size={24} />
+                <HiMoonIcon width={24} height={24} />
               ))
             }
             onClick={(e) => {
@@ -127,7 +131,7 @@ function EditorLayout({ children, cols = [] }: EditorLayoutProps) {
         </div>
         <Split
           mode={isLarge ? "horizontal" : "vertical"}
-          className={clsx(isLarge ? "w-full" : "min-w-full")}
+          className={clsx("mb-8", isLarge ? "w-full" : "min-w-full")}
         >
           {cols.map((child, key, arr) => {
             const style: CSSProperties = {
@@ -135,25 +139,34 @@ function EditorLayout({ children, cols = [] }: EditorLayoutProps) {
               height: isLarge ? "100%" : `${100 / arr.length}%`
             };
             return (
-              <div
-                key={key}
-                className={clsx(
-                  "flex-auto overflow-x-auto overflow-y-scroll text-xs shadow scrollbar-styled"
-                )}
-                style={style}
-              >
-                {child}
+              <div style={style} key={key}>
+                <EditorTabs
+                  tabs={[
+                    { title: "Hello.ts" },
+                    { title: "my.js" },
+                    { title: "adasdasdas.js" },
+                    { title: "fdfdfdf.js" },
+                    { title: "erere55.js" }
+                  ]}
+                />
+                <div
+                  className={clsx(
+                    "relative flex-auto overflow-auto text-xs shadow w-full h-[90%]"
+                  )}
+                >
+                  {child}
+                </div>
+                <div className="z-10 bottom-0 inset-x-0 px-2 py-2 flex justify-between items-center shadow-md bg-gray-300 dark:bg-gray-900">
+                  <div>Left bottom</div>
+                  <div>Right bottom</div>
+                </div>
               </div>
             );
           })}
         </Split>
       </Split>
-      <div className="z-10 bottom-0 inset-x-0 px-2 h-[4vh] flex justify-between items-center shadow-md bg-gray-300 dark:bg-gray-900">
-        <div>Left bottom</div>
-        <div>Right bottom</div>
-      </div>
     </div>
   );
 }
 
-export default EditorLayout;
+export default Editor;

@@ -1,7 +1,7 @@
 import DocumentTextIcon from "@heroicons/react/outline/esm/DocumentTextIcon";
 import ChevronRightIcon from "@heroicons/react/outline/esm/ChevronRightIcon";
 import clsx from "clsx";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 type StringOrJSX = string | JSX.Element | JSX.Element[];
 
@@ -99,7 +99,9 @@ const files: TreeListItem[] = [
   },
   {
     title: "verilong",
-    items: Array(20).fill(null).map((_, k) => ({ title: "hello"+k+".ts"}))
+    items: Array(20)
+      .fill(null)
+      .map((_, k) => ({ title: "hello" + k + ".ts" }))
   },
   {
     title: ".gitignore"
